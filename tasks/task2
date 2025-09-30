@@ -1,0 +1,51 @@
+import java.util.Scanner;
+
+public class task2 {
+
+    public static final double USD_TO_RUB = 83.07;
+    public static final double EUR_TO_RUB = 97.37;
+    public static final double GEL_TO_RUB = 30.66;
+    public static final double JPY_TO_RUB = 0.56;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Курс валют");
+        System.out.println("Доступные валюты: RUB, USD, EUR, GBP, JPY");
+        System.out.print("Введите сумму: ");
+        double amount = scanner.nextDouble();
+
+        System.out.print("Введите валюту (например, USD): ");
+        String currency = scanner.next().toUpperCase();
+
+        double inRubles = convertToRub(amount, currency);
+
+        if (inRubles < 0) {
+            System.out.println("Неизвестная валюта!");
+        } else {
+            System.out.println("\nКонвертация:");
+            printConversion(inRubles);
+        }
+
+        scanner.close();
+    }
+
+    public static double convertToRub(double amount, String currency) {
+        switch (currency) {
+            case "USD": return amount * USD_TO_RUB;
+            case "EUR": return amount * EUR_TO_RUB;
+            case "GEL": return amount * GEL_TO_RUB;
+            case "JPY": return amount * JPY_TO_RUB;
+            case "RUB": return amount;
+            default: return -1;
+        }
+    }
+
+    public static void printConversion(double rubAmount) {
+        System.out.printf("RUB: %.2f\n", rubAmount);
+        System.out.printf("USD: %.2f\n", rubAmount / USD_TO_RUB);
+        System.out.printf("EUR: %.2f\n", rubAmount / EUR_TO_RUB);
+        System.out.printf("GEL: %.2f\n", rubAmount / GEL_TO_RUB);
+        System.out.printf("JPY: %.2f\n", rubAmount / JPY_TO_RUB);
+    }
+}
